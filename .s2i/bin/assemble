@@ -6,6 +6,8 @@ set -eo pipefail
 
 APP_ROOT=${APP_ROOT:-/opt/app-root/src}
 
+# Ensure we're using /opt/app-root as our environment
+source /opt/anaconda3/bin/activate ${APP_ROOT}
 
 # Run the original Python S2I assemble script to install packages.
 
@@ -19,13 +21,10 @@ rm -rf /tmp/requirements.txt
 # INFO: Install everything that's required for Jupyter notebooks here.
 ########################################################################
 
-# Install pipenv for jupyter-nbrequirements to use
-# TODO: This should be removed once nbrequirements can use Thoth + micropipenv only
-pip install --no-cache-dir --disable-pip-version-check pipenv==2020.11.15
-
 # Install mod_wsgi for use in optional webdav support.
 
-pip install --no-cache-dir --disable-pip-version-check 'mod_wsgi==4.6.8'
+conda install -y conda-token
+conda install -y -c conda-forge mod_wsgi
 
 # Install base packages needed for running Jupyter Notebooks.
 
@@ -108,7 +107,7 @@ jupyter nbextension enable  --sys-prefix publish
 
 # Enable the extensions configurator
 
-pip install --no-cache-dir -U jupyter_nbextensions_configurator
+conda install -y -c conda-forge jupyter_nbextensions_configurator
 
 jupyter nbextensions_configurator enable --sys-prefix
 

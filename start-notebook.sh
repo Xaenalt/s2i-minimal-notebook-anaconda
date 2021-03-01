@@ -4,6 +4,10 @@ set -x
 
 set -eo pipefail
 
+APP_ROOT=${APP_ROOT:-/opt/app-root/src}
+
+source /opt/anaconda3/bin/activate ${APP_ROOT}
+
 if [[ ! -z "${JUPYTER_ENABLE_KERNELGATEWAY}" ]]; then
     exec /opt/app-root/bin/start-kernelgateway.sh "$@"
 fi

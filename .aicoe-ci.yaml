@@ -1,39 +1,10 @@
 check:
-  - overlays-build
-overlays_dir: overlays
-overlays:
-  - name: python36
-    build:
-      build-stratergy: Dockerfile
-      custom-tag: "latest"
-      registry: "quay.io"
-      registry-org: "thoth-station"
-      registry-project: "s2i-minimal-notebook"
-      registry-secret: "thoth-station-thoth-pusher-secret"
-
-  - name: python38
-    build:
-      build-stratergy: Dockerfile
-      custom-tag: "latest"
-      registry: "quay.io"
-      registry-org: "thoth-station"
-      registry-project: "s2i-minimal-py38-notebook"
-      registry-secret: "thoth-station-thoth-pusher-secret"
-
-  - name: f34-python39
-    build:
-      build-stratergy: Dockerfile
-      custom-tag: "latest"
-      registry: "quay.io"
-      registry-org: "thoth-station"
-      registry-project: "s2i-minimal-f34-py39-notebook"
-      registry-secret: "thoth-station-thoth-pusher-secret"
-
-  - name: f35-python310
-    build:
-      build-stratergy: Dockerfile
-      custom-tag: "latest"
-      registry: "quay.io"
-      registry-org: "thoth-station"
-      registry-project: "s2i-minimal-f35-py310-notebook"
-      registry-secret: "thoth-station-thoth-pusher-secret"
+  - thoth-build
+build:
+  build-stratergy: Dockerfile
+  dockerfile-path: Dockerfile
+  registry: quay.io
+  registry-org: modh
+  registry-project: s2i-minimal-notebook-anaconda
+  registry-secret: modh-pusher-secret
+  custom-tag: latest
